@@ -7,4 +7,18 @@ services:
     command: ["redis-server","--appendonly","yes"]
     volumes:
       - redis_data:/data    # container me jo bhi data wo permanently stor nahi hota jab hum volumes mention karte hain tou wahan par data reh jata hai 
-    restart: always
+    
+  mongo:
+    image: mongo:7
+    container_name: mongo_container
+    ports:
+      - "27017:27017"    # map MongoDB port to host(own machine) port
+    environment:
+      MONGO_INITDB_DATABASE: redis_mongo_db    # initial database name
+    volumes:
+      - mongo_data:/data/db    # container me jo bhi data wo permanently stor nahi hota jab hum volumes mention karte hain tou wahan par data reh jata hai
+
+# volumes banane se agr hum restart bhi karden tab bhi data rehta hai yahan par
+volumes:
+  redis_data:
+  mongo_data:

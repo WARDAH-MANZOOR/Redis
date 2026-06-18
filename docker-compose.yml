@@ -1,0 +1,10 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis_container
+    ports:
+      - "6379:6379"    # map Redis port to host(own machine) port
+    command: ["redis-server","--appendonly","yes"]
+    volumes:
+      - redis_data:/data    # container me jo bhi data wo permanently stor nahi hota jab hum volumes mention karte hain tou wahan par data reh jata hai 
+    restart: always
